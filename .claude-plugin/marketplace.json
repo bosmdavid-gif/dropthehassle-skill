@@ -1,0 +1,16 @@
+{
+  "name": "dropthehassle",
+  "description": "DropTheHassle agent skills: put a finished site online on a free link or your own domain.",
+  "owner": {
+    "name": "DropTheHassle",
+    "url": "https://dropthehassle.com"
+  },
+  "plugins": [
+    {
+      "name": "dropthehassle",
+      "source": "./",
+      "description": "Publish a finished static site with DropTheHassle, check it is live, and find a free domain. The agent never spends money.",
+      "category": "deployment"
+    }
+  ]
+}
