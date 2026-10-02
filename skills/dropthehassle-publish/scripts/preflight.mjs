@@ -60,7 +60,7 @@ const BUILD_HINT = {
   cra: 'Run `npm install && npm run build`, then publish build/.',
   vite: 'Run `npm install && npm run build`, then publish dist/.',
   astro: 'Run `npm install && npm run build`, then publish dist/.',
-  'tanstack-start': 'This is a server app (TanStack Start). As it is, it does not run on DropTheHassle, which hosts static files only. A static SPA build (dist/client) can, without server functions and /api routes. See references/troubleshooting.md, TanStack Start.',
+  'tanstack-start': 'This is a server app (TanStack Start). Build its pages as a static SPA build (dist/client) and deploy that; connect the server functions and /api routes with set_backend (paths /api/* and /_serverFn/*). See references/troubleshooting.md, TanStack Start.',
 };
 
 function choose(dir) {
@@ -79,7 +79,7 @@ function choose(dir) {
       if (hasShell(path.join(dir, name))) return { dir: path.join(dir, name), why: `${name}/ is a TanStack Start SPA build (_shell.html)`, fw: 'tanstack-start' };
     }
     const marker = ['server.js', 'app.py', 'main.py', 'index.php', 'wsgi.py', 'manage.py'].find((m) => isFile(path.join(dir, m)));
-    if (marker) return { dir, blocker: `No index.html, and ${marker} is here: this is an app that needs a server. DropTheHassle hosts static files only. Host the server elsewhere (Railway, Render, Fly); a static front end can stay on DropTheHassle.` };
+    if (marker) return { dir, blocker: `No index.html, and ${marker} is here: this is an app that runs on a server. Host the server elsewhere (for example on Supabase, AWS, DigitalOcean or your own server) and connect it with set_backend; static pages can stay on DropTheHassle.` };
     return { dir, blocker: 'No index.html (or _shell.html for a TanStack SPA build) at the top of this folder (or in dist/, build/, out/, _site/, public/ or docs/). Rename the main page to index.html, or point at the folder that has it.' };
   }
   const prefer = { next: 'out', cra: 'build', nuxt: '.output/public', 'tanstack-start': 'dist/client', vite: 'dist', astro: 'dist' }[fw];

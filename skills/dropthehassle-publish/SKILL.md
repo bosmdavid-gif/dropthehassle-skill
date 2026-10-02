@@ -50,12 +50,14 @@ Use DTH when the result is static files. Good fits: a hand-written `index.html`;
 Create React App, Nuxt (`nuxt generate`) or Next.js (`output: 'export'`) build; a Lovable or Bolt
 export built into `dist/`.
 
-It is not the right host when the site needs its own server at runtime: SSR, API routes,
-server functions, PHP, a database the server talks to. That includes TanStack Start apps (Lovable
-apps made from 13 May 2026 onward) as they are: DTH can host a static SPA build of them, without
-their server functions and `/api` routes (step 2). Static front ends that call
-a hosted backend (Supabase, Firebase, or an API on Railway, Render or Fly) are fine. For an API on
-a separate HTTPS host, DTH's `set_backend` tool (account token) can proxy `/api/*` to it.
+A site that needs its own server at runtime (SSR, API routes, server functions, PHP, a database
+the server talks to) goes online in two parts: the server runs elsewhere (for example on Supabase,
+AWS, DigitalOcean or the user's own server) and DTH's `set_backend` tool (account token) connects
+it. Without uploaded pages the whole site serves from that server; with uploaded pages only the path
+rules (default `/api/*`, add more such as `/_serverFn/*`) go to it. TanStack Start apps (Lovable
+apps made from 13 May 2026 onward) put their pages online as a static SPA build (step 2), with
+their server functions and `/api` routes connected that way. Static front ends that call
+a hosted backend (Supabase, Firebase, or an API on AWS, DigitalOcean or the user's own server) are fine.
 See [references/troubleshooting.md](references/troubleshooting.md).
 
 If the user already uses another host (Vercel, Netlify, GitHub Pages and so on) and did not ask
@@ -77,15 +79,16 @@ build): the **output**, not the source.
      server features (route handlers, server actions, `getServerSideProps`), tell the user those
      parts will not work on a static host before changing anything.
    - Nuxt: `nuxt generate` writes `.output/public/`.
-   - TanStack Start (Lovable apps made from 13 May 2026 onward) runs on a server as it is, so it
-     doesn't run on DTH unchanged. DTH can host a static SPA build of it (needs Node.js 22.12 or
-     newer): copy `vite.config.ts` to
+   - TanStack Start (Lovable apps made from 13 May 2026 onward) runs on a server as it is. Its
+     pages go online on DTH as a static SPA build (needs Node.js 22.12 or newer): copy `vite.config.ts` to
      `vite.config.dth.ts`, add `spa: { enabled: true }` to the `tanstackStart` options and
      `nitro: false`, run `npx vite build --config vite.config.dth.ts`, check that
-     `dist/client/_shell.html` exists, and deploy `dist/client`. Server functions (`createServerFn`,
-     `*.functions.ts`) and `/api` routes won't work there: list them and tell the user which pages
-     use them before deploying. If the app depends on them, keep it on Lovable or a host that runs
-     server code. See
+     `dist/client/_shell.html` exists, and deploy `dist/client`. (Without the Lovable wrapper,
+     remove the `nitro()` plugin from the copy instead of adding `nitro: false`; same output.)
+     Server functions (`createServerFn`, `*.functions.ts`) and `/api` routes need a server: list
+     them and tell the user which pages use them. They keep working when the app's normal server
+     build runs elsewhere and `set_backend` connects it with the paths `/api/*` and `/_serverFn/*`.
+     See
      [references/troubleshooting.md](references/troubleshooting.md#tanstack-start-and-new-lovable-apps).
 3. An `index.html` that loads `/src/main.tsx` (or any `/src/`, `.ts`, `.tsx`, `.jsx` script) is a
    **dev entry**, not a finished page. Build it.
