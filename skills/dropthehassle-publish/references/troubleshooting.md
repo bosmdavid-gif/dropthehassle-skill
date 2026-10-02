@@ -21,6 +21,9 @@ agent when there is one. Follow those first. They are written for this.
 | "That code did not work…" | (CLI) | The dashboard code is single-use and lasts 15 minutes. Ask the human for a fresh one. |
 | "This folder is not linked yet…" | (CLI status/rollback) | `status` and `rollback` need a folder deployed with `--login` or `--code`. After an anonymous deploy they don't work. |
 
+When you tell the user about a server part (`server_app`, `server_app_detected`), use exactly this sentence:
+"Got a server part too? Keep it on AWS, Google Cloud, DigitalOcean or your own server, and your AI links it to your site in one step."
+
 ## Updating a site later
 
 - Same machine, same folder: run `npx -y dropthehassle deploy <folder>` again. `.dropthehassle.json`
@@ -38,7 +41,7 @@ agent when there is one. Follow those first. They are written for this.
 
 Lovable apps made from 13 May 2026 onward are TanStack Start apps. They are server apps: as they
 are, DTH does not run them itself. Two routes. 1) Run the whole app on AWS, Google Cloud,
-DigitalOcean or the user's own server (data can stay on Supabase), then call `set_backend` without
+DigitalOcean or the user's own server (data can stay where it is), then call `set_backend` without
 `site` (account token, hosted connector https://dropthehassle.com/mcp): every path is proxied, so
 server functions and `/api` routes work behind a DTH link. 2) A static SPA build (below), without
 server functions and `/api` routes. Keeping it on Lovable is also fine. Don't split one app between

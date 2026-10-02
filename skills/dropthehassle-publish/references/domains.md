@@ -15,7 +15,7 @@
 
   It returns something like
   `{"name":"studiomaple.com","available":true,"price_eur":19,"renew_price_eur":19,"currency":"EUR","verified":true,"price_source":"registrar"}`.
-  - `available`: only call a name free when this is `true`.
+  - `available`: only call a name available when this is `true`.
   - `price_eur` / `renew_price_eur`: the first year and the renewal price. The local MCP server phrases
     it as "EUR N/year incl. VAT in the EU, or USD N elsewhere". Use that wording.
   - `verified: false`: the availability is optimistic. Say it's confirmed at checkout.
@@ -34,7 +34,7 @@ results, for example:
 ```
 studiomaple.com: available, EUR 19/year incl. VAT in the EU, or USD 19 elsewhere, the same every year.
 maplestudio.com: taken.
-studiomaple.nl: available, EUR 12/year …
+studiomaple.org: available, EUR 19/year incl. VAT in the EU, or USD 19 elsewhere, the same every year.
 ```
 
 Then ask whether they want one. Don't create a payment link unasked.
