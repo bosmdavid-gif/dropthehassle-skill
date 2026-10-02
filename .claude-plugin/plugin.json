@@ -1,6 +1,6 @@
 {
   "name": "dropthehassle",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Publish a finished static site to a free HTTPS link with DropTheHassle, check it is live, and find a free domain. The agent never spends money.",
   "author": {
     "name": "DropTheHassle",
@@ -9,5 +9,14 @@
   "homepage": "https://dropthehassle.com",
   "repository": "https://github.com/bosmdavid-gif/dropthehassle-skill",
   "license": "MIT",
-  "keywords": ["deploy", "static-site", "hosting", "domain", "publish", "dropthehassle"]
+  "keywords": [
+    "deploy",
+    "website",
+    "hosting",
+    "domain",
+    "publish",
+    "dropthehassle"
+  ],
+  "icon": ".claude-plugin/icon.png",
+  "privacyPolicyUrl": "https://dropthehassle.com/privacy"
 }
