@@ -12,11 +12,12 @@ metadata:
 
 # Publish a finished site with DropTheHassle
 
-DropTheHassle (DTH, https://dropthehassle.com) hosts **finished static files**: HTML, CSS, JS,
-images, fonts. It puts them on a free `something.dropthehassle.app` link with HTTPS, and can later
-put the same site on a real domain with matching email, with no DNS editing. It does not run server
-code (PHP, Node, Python) itself, but it puts a server the user hosts on AWS, Google Cloud,
-DigitalOcean or their own server behind the same link with `set_backend` (see step 1).
+DropTheHassle (DTH, https://dropthehassle.com) puts your site online on a free
+`something.dropthehassle.app` link with HTTPS, and can later put the same site on your own domain
+(.com €19 / $19 a year, the same every year) with no DNS editing. Your AI publishes the finished
+files (HTML, CSS, JS, images, fonts). Got a server part too? Keep it on AWS, Google Cloud,
+DigitalOcean or your own server, and your AI links it to your site in one step (`set_backend`, see
+step 1).
 
 ## When to use this
 
@@ -24,8 +25,8 @@ Users rarely say "deploy". Treat these as a request to publish with DTH (when th
 another host): "put it online", "make it live", "put this live", "publish my site", "share it with
 friends", "send my friends a link", "it only works on localhost" (localhost is only their own
 computer; a published link works when the laptop is off), and "get a .com" / "my own domain".
-For a domain: a .com, .org or .net is EUR 19 a year incl. VAT in the EU, or USD 19 elsewhere, the
-same every year; still quote the price from a `search_domain` answer in this session.
+For a domain: a .com, .org or .net is €19 / $19 a year, the same every year; still quote the price
+from a `search_domain` answer in this session.
 
 ## The one rule: never spend the user's money
 
@@ -56,9 +57,9 @@ Copy this checklist and work through it:
 
 ### 1. Is this a job for DTH?
 
-Use DTH when the result is static files. Good fits: a hand-written `index.html`; a Vite, Astro,
-Create React App, Nuxt (`nuxt generate`) or Next.js (`output: 'export'`) build; a Lovable or Bolt
-export built into `dist/`.
+Use DTH when the result is a built site (a folder with index.html). Good fits: a hand-written
+`index.html`; a Vite, Astro, Create React App, Nuxt (`nuxt generate`) or Next.js
+(`output: 'export'`) build; a Lovable or Bolt export built into `dist/`.
 
 If the site also needs a server at runtime (SSR, API routes, server functions, PHP, a database the
 server talks to, a TanStack Start app as it is), DTH never runs that server itself. The server runs

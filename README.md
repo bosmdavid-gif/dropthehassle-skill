@@ -14,12 +14,12 @@ and hand you a payment link, never to buy.
 ## What the agent does with it
 
 1. Checks the folder is a finished site (an `index.html` at the top), not source code, and runs the
-   build first when it is (Vite, Astro, Next.js static export, Nuxt generate, Create React App,
+   build first when it is (Vite, Astro, Next.js `output: 'export'`, Nuxt generate, Create React App,
    Lovable/Bolt exports). DropTheHassle serves the built files and never runs a server itself. A
    server app (SSR, API routes, server functions, a TanStack Start app) runs on AWS, Google Cloud,
    DigitalOcean or your own server and is connected with `set_backend` or the dashboard's Backend
    card: DropTheHassle then puts it behind the same link. A TanStack Start app (Lovable from
-   13 May 2026) can also go online as a static SPA build (`dist/client`), without its server
+   13 May 2026) can also go online as an SPA build (`dist/client`), without its server
    functions and `/api` routes.
 2. Runs a local preflight (`scripts/preflight.mjs`, no network, no dependencies) against the upload
    limits.
@@ -30,6 +30,20 @@ and hand you a payment link, never to buy.
    [Is my website down?](https://dropthehassle.com/is-my-website-down)).
 6. If you want your own name, checks which domains are really free and what they cost, and stops
    there until you say otherwise.
+
+## Cursor
+
+Install the DropTheHassle plugin from the Cursor Marketplace, or add only the MCP server.
+
+One click: `cursor://anysphere.cursor-deeplink/mcp/install?name=dropthehassle&config=eyJ1cmwiOiJodHRwczovL2Ryb3B0aGVoYXNzbGUuY29tL21jcCJ9`
+
+Or add to `mcp.json`:
+
+```json
+{ "mcpServers": { "dropthehassle": { "url": "https://dropthehassle.com/mcp" } } }
+```
+
+Then ask: "put my site online". No token needed.
 
 ## Install
 
