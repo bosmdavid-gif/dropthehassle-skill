@@ -48,10 +48,11 @@ Copy this checklist and work through it:
 
 Use DTH when the result is static files. Good fits: a hand-written `index.html`; a Vite, Astro,
 Create React App, Nuxt (`nuxt generate`) or Next.js (`output: 'export'`) build; a Lovable or Bolt
-export built into `dist/`; a TanStack Start app built in SPA mode.
+export built into `dist/`.
 
 It is not the right host when the site needs its own server at runtime: SSR, API routes,
-server functions, PHP, a database the server talks to. Say so plainly. Static front ends that call
+server functions, PHP, a database the server talks to. That includes TanStack Start apps (Lovable
+apps made from 13 May 2026 onward) as they are. Say so plainly, and don't promise they will work. Static front ends that call
 a hosted backend (Supabase, Firebase, or an API on Railway, Render or Fly) are fine. For an API on
 a separate HTTPS host, DTH's `set_backend` tool (account token) can proxy `/api/*` to it.
 See [references/troubleshooting.md](references/troubleshooting.md).
@@ -74,8 +75,9 @@ DTH wants the folder whose top level contains `index.html`: the **output**, not 
      server features (route handlers, server actions, `getServerSideProps`), tell the user those
      parts will not work on a static host before changing anything.
    - Nuxt: `nuxt generate` writes `.output/public/`.
-   - TanStack Start (Lovable apps made from 13 May 2026 onward): build in SPA mode and publish
-     `dist/client`. Follow the steps in
+   - TanStack Start (Lovable apps made from 13 May 2026 onward) is a server app. Tell the user it
+     doesn't run on DTH as it is, and that server functions and `/api` routes only work on a
+     back-end hosted elsewhere. Don't promise a static build will work; see
      [references/troubleshooting.md](references/troubleshooting.md#tanstack-start-and-new-lovable-apps).
 3. An `index.html` that loads `/src/main.tsx` (or any `/src/`, `.ts`, `.tsx`, `.jsx` script) is a
    **dev entry**, not a finished page. Build it.
