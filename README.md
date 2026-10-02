@@ -15,7 +15,9 @@ and hand you a payment link, never to buy.
 
 1. Checks the folder is a finished site (an `index.html` at the top), not source code, and runs the
    build first when it is (Vite, Astro, Next.js static export, Nuxt generate, Create React App,
-   Lovable/Bolt exports, TanStack Start in SPA mode).
+   Lovable/Bolt exports). DropTheHassle hosts static files only: server apps (SSR, API routes,
+   server functions, including TanStack Start and Lovable apps made from 13 May 2026) don't run
+   here as they are; their back-end has to be hosted elsewhere.
 2. Runs a local preflight (`scripts/preflight.mjs`, no network, no dependencies) against the upload
    limits.
 3. Sets up the DropTheHassle CLI (`npx -y dropthehassle deploy`), the local MCP server

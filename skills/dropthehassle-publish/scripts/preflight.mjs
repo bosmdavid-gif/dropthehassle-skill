@@ -58,7 +58,7 @@ const BUILD_HINT = {
   cra: 'Run `npm install && npm run build`, then publish build/.',
   vite: 'Run `npm install && npm run build`, then publish dist/.',
   astro: 'Run `npm install && npm run build`, then publish dist/.',
-  'tanstack-start': 'Build it in SPA mode and publish dist/client (see references/troubleshooting.md, TanStack Start).',
+  'tanstack-start': 'This is a server app (TanStack Start). As it is, it does not run on DropTheHassle, which hosts static files only. See references/troubleshooting.md, TanStack Start.',
 };
 
 function choose(dir) {
