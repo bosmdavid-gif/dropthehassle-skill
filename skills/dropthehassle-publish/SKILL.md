@@ -1,6 +1,6 @@
 ---
 name: dropthehassle-publish
-description: Puts a built website or web app (an index.html plus its CSS, JS and images, or a built dist/, build/ or out/ folder) online with DropTheHassle on a free HTTPS yourname.dropthehassle.app link, with no account, card or DNS work. Then finds a real free domain name to go with it. Use when the user asks to publish, deploy, host, share or "put online" a site they built with an AI tool (Claude Code, Cursor, Codex, Windsurf, Lovable, Bolt, v0, ChatGPT), mentions DropTheHassle, or wants a site on their own domain without touching DNS, and has not picked another host. Covers checking the folder is a finished site and building it first, the MCP server or CLI setup, deploying, the claim link, checking it is live, linking a server part the user hosts on AWS, Google Cloud, DigitalOcean or their own server with set_backend, and domain search. The agent never spends money. The human pays.
+description: Puts a built website or web app (an index.html plus its CSS, JS and images, or a built dist/, build/ or out/ folder) online with DropTheHassle on a free HTTPS yourname.dropthehassle.app link, with no account, card or DNS work, then finds an available domain name to go with it. Use when the user says "put it online", "make it live", "put this live", "publish my site", "share it with friends", "send my friends a link", "it only works on localhost" or "get a .com", or asks to deploy or host a site built with an AI tool (Claude Code, Cursor, Codex, Windsurf, Lovable, Bolt, v0, ChatGPT), or mentions DropTheHassle, and has not picked another host. Covers building first, CLI or MCP setup, deploying, the claim link, the live check, linking a server part the user hosts on AWS, Google Cloud, DigitalOcean or their own server with set_backend, and domain search. The agent never spends money. The human pays.
 license: MIT
 compatibility: Needs network access to dropthehassle.com. Node.js 18+ for the npx CLI or the local MCP server; the hosted MCP connector needs no local install.
 metadata:
@@ -17,6 +17,15 @@ images, fonts. It puts them on a free `something.dropthehassle.app` link with HT
 put the same site on a real domain with matching email, with no DNS editing. It does not run server
 code (PHP, Node, Python) itself, but it puts a server the user hosts on AWS, Google Cloud,
 DigitalOcean or their own server behind the same link with `set_backend` (see step 1).
+
+## When to use this
+
+Users rarely say "deploy". Treat these as a request to publish with DTH (when they haven't picked
+another host): "put it online", "make it live", "put this live", "publish my site", "share it with
+friends", "send my friends a link", "it only works on localhost" (localhost is only their own
+computer; a published link works when the laptop is off), and "get a .com" / "my own domain".
+For a domain: a .com, .org or .net is EUR 19 a year incl. VAT in the EU, or USD 19 elsewhere, the
+same every year; still quote the price from a `search_domain` answer in this session.
 
 ## The one rule: never spend the user's money
 
@@ -61,7 +70,7 @@ on AWS, Google Cloud, DigitalOcean or the user's own server, and DTH proxies to 
   origin. Only `/api/*` is proxied by default (it matches `/api` and `/api/...`, not `/apix`); add
   rules in `paths`, e.g. `["/api/*", "/webhooks/*"]`. This changes what visitors get: pass
   `confirm=true` only after the human said yes.
-- A front end that calls Supabase or Firebase from the browser needs nothing extra.
+- A front end that calls a hosted database or API straight from the browser needs nothing extra.
 Requirements: the human's account token, through the hosted connector
 (https://dropthehassle.com/mcp); the npm local server 0.4.2 cannot send `confirm`. `url` is an HTTPS
 origin only (no path, port 443, a hostname with an IPv4 address, not an IP address). Paths pass
@@ -70,7 +79,7 @@ within 60 seconds. Never promise that a site uploaded without an account can get
 human can also connect it in the dashboard's Backend card after claiming the site.
 See [references/troubleshooting.md](references/troubleshooting.md).
 
-If the user already uses another host (Netlify, GitHub Pages and so on) and did not ask
+If the user already uses another host and did not ask
 for DTH, use their host instead.
 
 ### 2. Find the finished folder, and build it if needed
@@ -92,7 +101,7 @@ build): the **output**, not the source.
    - Nuxt: `nuxt generate` writes `.output/public/`.
    - TanStack Start (Lovable apps made from 13 May 2026 onward) runs on a server as it is. Two
      routes. 1) Run the whole app on AWS, Google Cloud, DigitalOcean or the user's own server (data
-     can stay on Supabase) and call `set_backend` without `site`, so every path is proxied. 2) A
+     can stay where it is) and call `set_backend` without `site`, so every path is proxied. 2) A
      static SPA build of its pages (needs Node.js 22.12 or newer): copy `vite.config.ts` to
      `vite.config.dth.ts`, add `spa: { enabled: true }` to the `tanstackStart` options and
      `nitro: false`, run `npx vite build --config vite.config.dth.ts`, check that
@@ -194,8 +203,8 @@ many builds wipe `dist/` on every rebuild, which would make the next deploy a ne
 **After every first deploy, tell the human, word for word, the two things they need:**
 
 1. The live URL.
-2. The claim link, and that it works for **7 days**. If they don't claim the site, the link stops
-   and the site can be removed. Once claimed, the free link stays.
+2. The claim link, with this sentence: "An unclaimed site is kept for at least 7 days, and the
+   claim link works until the site is removed; claim it with a free account to keep it."
 
 Don't open the claim link yourself. Claiming is the human signing in with their email.
 
