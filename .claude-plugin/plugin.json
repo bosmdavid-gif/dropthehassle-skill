@@ -1,7 +1,7 @@
 {
   "name": "dropthehassle",
-  "version": "1.0.1",
-  "description": "Publish a finished static site to a free HTTPS link with DropTheHassle, check it is live, and find a free domain. The agent never spends money.",
+  "version": "1.0.2",
+  "description": "Put your site online with DropTheHassle: a live HTTPS link in one step, a check that it's live, and your own domain without DNS. The agent never spends money.",
   "author": {
     "name": "DropTheHassle",
     "url": "https://dropthehassle.com"
