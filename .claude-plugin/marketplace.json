@@ -9,7 +9,7 @@
     {
       "name": "dropthehassle",
       "source": "./",
-      "description": "Publish a finished static site with DropTheHassle, check it is live, and find a free domain. The agent never spends money.",
+      "description": "Put your site online with DropTheHassle: a live HTTPS link in one step, a check that it's live, and your own domain without DNS. The agent never spends money.",
       "category": "deployment"
     }
   ]
