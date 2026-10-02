@@ -52,7 +52,8 @@ export built into `dist/`.
 
 It is not the right host when the site needs its own server at runtime: SSR, API routes,
 server functions, PHP, a database the server talks to. That includes TanStack Start apps (Lovable
-apps made from 13 May 2026 onward) as they are. Say so plainly, and don't promise they will work. Static front ends that call
+apps made from 13 May 2026 onward) as they are: DTH can host a static SPA build of them, without
+their server functions and `/api` routes (step 2). Static front ends that call
 a hosted backend (Supabase, Firebase, or an API on Railway, Render or Fly) are fine. For an API on
 a separate HTTPS host, DTH's `set_backend` tool (account token) can proxy `/api/*` to it.
 See [references/troubleshooting.md](references/troubleshooting.md).
@@ -75,9 +76,14 @@ DTH wants the folder whose top level contains `index.html`: the **output**, not 
      server features (route handlers, server actions, `getServerSideProps`), tell the user those
      parts will not work on a static host before changing anything.
    - Nuxt: `nuxt generate` writes `.output/public/`.
-   - TanStack Start (Lovable apps made from 13 May 2026 onward) is a server app. Tell the user it
-     doesn't run on DTH as it is, and that server functions and `/api` routes only work on a
-     back-end hosted elsewhere. Don't promise a static build will work; see
+   - TanStack Start (Lovable apps made from 13 May 2026 onward) runs on a server as it is, so it
+     doesn't run on DTH unchanged. DTH can host a static SPA build of it: copy `vite.config.ts` to
+     `vite.config.dth.ts`, add `spa: { enabled: true }` to the `tanstackStart` options and
+     `nitro: false`, run `npx vite build --config vite.config.dth.ts`, check that
+     `dist/client/_shell.html` exists, and deploy `dist/client`. Server functions (`createServerFn`,
+     `*.functions.ts`) and `/api` routes won't work there: list them and tell the user which pages
+     use them before deploying. If the app depends on them, keep it on Lovable or a host that runs
+     server code. See
      [references/troubleshooting.md](references/troubleshooting.md#tanstack-start-and-new-lovable-apps).
 3. An `index.html` that loads `/src/main.tsx` (or any `/src/`, `.ts`, `.tsx`, `.jsx` script) is a
    **dev entry**, not a finished page. Build it.

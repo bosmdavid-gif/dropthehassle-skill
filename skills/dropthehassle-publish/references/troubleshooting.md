@@ -35,14 +35,13 @@ agent when there is one. Follow those first. They are written for this.
 
 ## TanStack Start and new Lovable apps
 
-Lovable apps made from 13 May 2026 onward are TanStack Start apps. They are server apps: as they
-are, they don't run on DTH, which only hosts static files. Tell the user that plainly and don't
-promise it will work. The usual answer is to keep the app on Lovable or on a host that runs server
-code. Server functions and `/api` routes only work on a back-end hosted elsewhere (DTH's
-`set_backend` can put an HTTPS back-end behind the user's domain).
+Lovable apps made from 13 May 2026 onward are TanStack Start apps. As they are, they run on a
+server, so they don't run on DTH unchanged: DTH only hosts static files. DTH can host a static SPA
+build of them. Server functions and `/api` routes won't work in that build; they only work on a
+back-end hosted elsewhere (DTH's `set_backend` can put an HTTPS back-end behind the user's domain).
 
-Only if the user wants to try a static build anyway: get the code from GitHub first (every Lovable
-plan can connect to GitHub). The server's own instruction for the agent is:
+Get the code from GitHub first (every Lovable plan can connect to GitHub). The server's own
+instruction for the agent is:
 
 > Build this TanStack Start app as static files, without changing how it runs on Lovable. Leave
 > vite.config.ts as it is. Create vite.config.dth.ts as a copy of vite.config.ts, then: add
@@ -55,7 +54,7 @@ plan can connect to GitHub). The server's own instruction for the agent is:
 If that build works and the pages the user needs don't rely on server functions or `/api` routes,
 deploy `dist/client` and check the site in a browser. If the app relies on server functions, tell
 the user to keep it on Lovable or use a host that runs server code. Guides:
-https://dropthehassle.com/guides/lovable-custom-domain and
+https://dropthehassle.com/guides/lovable-tanstack-static and
 https://dropthehassle.com/guides/move-off-lovable
 
 ## Broken pages after a successful deploy
