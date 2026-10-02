@@ -60,7 +60,7 @@ const BUILD_HINT = {
   cra: 'Run `npm install && npm run build`, then publish build/.',
   vite: 'Run `npm install && npm run build`, then publish dist/.',
   astro: 'Run `npm install && npm run build`, then publish dist/.',
-  'tanstack-start': 'This is a server app (TanStack Start). Build its pages as a static SPA build (dist/client) and deploy that; connect the server functions and /api routes with set_backend (paths /api/* and /_serverFn/*). See references/troubleshooting.md, TanStack Start.',
+  'tanstack-start': 'This is a server app (TanStack Start). Run the whole app on AWS, Google Cloud, DigitalOcean or your own server and connect it with set_backend, or make a static SPA build (dist/client) without its server functions and /api routes. See references/troubleshooting.md, TanStack Start.',
 };
 
 function choose(dir) {
@@ -79,7 +79,7 @@ function choose(dir) {
       if (hasShell(path.join(dir, name))) return { dir: path.join(dir, name), why: `${name}/ is a TanStack Start SPA build (_shell.html)`, fw: 'tanstack-start' };
     }
     const marker = ['server.js', 'app.py', 'main.py', 'index.php', 'wsgi.py', 'manage.py'].find((m) => isFile(path.join(dir, m)));
-    if (marker) return { dir, blocker: `No index.html, and ${marker} is here: this is an app that runs on a server. Host the server elsewhere (for example on Supabase, AWS, DigitalOcean or your own server) and connect it with set_backend; static pages can stay on DropTheHassle.` };
+    if (marker) return { dir, blocker: `No index.html, and ${marker} is here: this is an app that needs a server. DropTheHassle does not run it itself: host it on AWS, Google Cloud, DigitalOcean or your own server, then connect it with set_backend (no site: every path is proxied) or the dashboard's Backend card.` };
     return { dir, blocker: 'No index.html (or _shell.html for a TanStack SPA build) at the top of this folder (or in dist/, build/, out/, _site/, public/ or docs/). Rename the main page to index.html, or point at the folder that has it.' };
   }
   const prefer = { next: 'out', cra: 'build', nuxt: '.output/public', 'tanstack-start': 'dist/client', vite: 'dist', astro: 'dist' }[fw];
@@ -142,7 +142,7 @@ if (picked.blocker) {
     report.warnings.push(`Over the no-account limit (${ANON.files} files, 25 MB) but within the signed-in one (5,000 files, 100 MB). Deploy with --login, or a token, or make the site smaller.`);
   }
   if (s.forbidden.length) report.warnings.push(`Executable or archive files are refused before the site is claimed: ${s.forbidden.join(', ')}. Remove them from the site folder.`);
-  if (s.server.length) report.warnings.push(`Server-side files found (${s.server.join(', ')}). DropTheHassle does not run server code, so they will not execute. If the site needs them to work, it needs a server host.`);
+  if (s.server.length) report.warnings.push(`Server-side files found (${s.server.join(', ')}). DropTheHassle does not run server code, so they will not execute here. If the site needs them, run them on AWS, Google Cloud, DigitalOcean or your own server and connect it with set_backend.`);
   if (picked.dir === target && isFile(path.join(target, 'package.json'))) report.warnings.push('package.json sits next to index.html, so the whole project folder would be published. Check that this is the finished site, not source.');
   if (s.biggest.length && s.biggest[0][1] > 5 * 1048576) report.warnings.push('Largest files: ' + s.biggest.filter(([, b]) => b > 1048576).map(([n, b]) => `${n} (${(b / 1048576).toFixed(1)} MB)`).join(', '));
   report.ready = report.blockers.length === 0;

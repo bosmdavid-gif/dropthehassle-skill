@@ -1,7 +1,7 @@
 # DropTheHassle publish skill
 
-An open [Agent Skill](https://agentskills.io) that teaches your coding agent to put a **finished
-static site** online with [DropTheHassle](https://dropthehassle.com): a free HTTPS
+An open [Agent Skill](https://agentskills.io) that teaches your coding agent to put a **built
+site or web app** online with [DropTheHassle](https://dropthehassle.com): a free HTTPS
 `yourname.dropthehassle.app` link with no account, card or DNS work, then a real domain when you
 want one.
 
@@ -15,10 +15,12 @@ and hand you a payment link, never to buy.
 
 1. Checks the folder is a finished site (an `index.html` at the top), not source code, and runs the
    build first when it is (Vite, Astro, Next.js static export, Nuxt generate, Create React App,
-   Lovable/Bolt exports). Server apps (SSR, API routes, server functions) go online in two parts:
-   the server runs elsewhere and `set_backend` connects it. A TanStack Start app (Lovable from
-   13 May 2026) puts its pages online as a static SPA build (`dist/client`), with its server
-   functions and `/api` routes connected that way.
+   Lovable/Bolt exports). DropTheHassle serves the built files and never runs a server itself. A
+   server app (SSR, API routes, server functions, a TanStack Start app) runs on AWS, Google Cloud,
+   DigitalOcean or your own server and is connected with `set_backend` or the dashboard's Backend
+   card: DropTheHassle then puts it behind the same link. A TanStack Start app (Lovable from
+   13 May 2026) can also go online as a static SPA build (`dist/client`), without its server
+   functions and `/api` routes.
 2. Runs a local preflight (`scripts/preflight.mjs`, no network, no dependencies) against the upload
    limits.
 3. Sets up the DropTheHassle CLI (`npx -y dropthehassle deploy`), the local MCP server
