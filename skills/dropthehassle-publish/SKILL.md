@@ -63,7 +63,8 @@ for DTH, use their host instead.
 
 ### 2. Find the finished folder, and build it if needed
 
-DTH wants the folder whose top level contains `index.html`: the **output**, not the source.
+DTH wants the folder whose top level contains `index.html` (or `_shell.html` for a TanStack SPA
+build): the **output**, not the source.
 
 1. If the folder has `index.html` at the top and no `package.json` build step, that folder is the
    site.
@@ -77,7 +78,8 @@ DTH wants the folder whose top level contains `index.html`: the **output**, not 
      parts will not work on a static host before changing anything.
    - Nuxt: `nuxt generate` writes `.output/public/`.
    - TanStack Start (Lovable apps made from 13 May 2026 onward) runs on a server as it is, so it
-     doesn't run on DTH unchanged. DTH can host a static SPA build of it: copy `vite.config.ts` to
+     doesn't run on DTH unchanged. DTH can host a static SPA build of it (needs Node.js 22.12 or
+     newer): copy `vite.config.ts` to
      `vite.config.dth.ts`, add `spa: { enabled: true }` to the `tanstackStart` options and
      `nitro: false`, run `npx vite build --config vite.config.dth.ts`, check that
      `dist/client/_shell.html` exists, and deploy `dist/client`. Server functions (`createServerFn`,
