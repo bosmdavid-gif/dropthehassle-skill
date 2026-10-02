@@ -1,6 +1,6 @@
 {
   "name": "dropthehassle",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Put your site online with DropTheHassle: a live HTTPS link in one step, a check that it's live, and your own domain without DNS. The agent never spends money.",
   "author": {
     "name": "DropTheHassle",

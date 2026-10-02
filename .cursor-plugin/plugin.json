@@ -1,0 +1,11 @@
+{
+  "name": "dropthehassle",
+  "version": "1.0.3",
+  "description": "Put your site online from Cursor. Your AI publishes it on a free link with HTTPS, no token needed. Your own .com is €19 / $19 a year, the same every year. Your AI never pays.",
+  "author": { "name": "DropTheHassle", "email": "hello@dropthehassle.com" },
+  "homepage": "https://dropthehassle.com/?utm_source=cursor-marketplace&utm_medium=listing",
+  "repository": "https://github.com/bosmdavid-gif/dropthehassle-skill",
+  "license": "MIT",
+  "keywords": ["deploy", "put site online", "publish website", "custom domain", "https", "hosting", "vibe coding", "mcp"],
+  "logo": ".claude-plugin/icon.png"
+}
