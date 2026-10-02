@@ -75,7 +75,8 @@ for DTH, use their host instead.
 
 ### 2. Find the finished folder, and build it if needed
 
-DTH wants the folder whose top level contains `index.html`: the **output**, not the source.
+DTH wants the folder whose top level contains `index.html` (or `_shell.html` for a TanStack SPA
+build): the **output**, not the source.
 
 1. If the folder has `index.html` at the top and no `package.json` build step, that folder is the
    site.
@@ -89,11 +90,17 @@ DTH wants the folder whose top level contains `index.html`: the **output**, not 
      changing anything: either export without them, or run the Next.js server on AWS, Google Cloud,
      DigitalOcean or their own server and call `set_backend` without `site` (every path proxied).
    - Nuxt: `nuxt generate` writes `.output/public/`.
-   - TanStack Start (Lovable apps made from 13 May 2026 onward) is a server app. Two routes: run the
-     whole app on AWS, Google Cloud, DigitalOcean or the user's own server (data can stay on
-     Supabase) and call `set_backend` without `site`, so every path is proxied; or try a static
-     build without server functions and `/api` routes. Don't promise the static build keeps them
-     working, and don't split one app between a static build and a server; see
+   - TanStack Start (Lovable apps made from 13 May 2026 onward) runs on a server as it is. Two
+     routes. 1) Run the whole app on AWS, Google Cloud, DigitalOcean or the user's own server (data
+     can stay on Supabase) and call `set_backend` without `site`, so every path is proxied. 2) A
+     static SPA build of its pages (needs Node.js 22.12 or newer): copy `vite.config.ts` to
+     `vite.config.dth.ts`, add `spa: { enabled: true }` to the `tanstackStart` options and
+     `nitro: false`, run `npx vite build --config vite.config.dth.ts`, check that
+     `dist/client/_shell.html` exists, and deploy `dist/client`. (Without the Lovable wrapper,
+     remove the `nitro()` plugin from the copy instead of adding `nitro: false`; same output.)
+     Server functions (`createServerFn`, `*.functions.ts`) and `/api` routes don't work in that
+     static copy: list them and tell the user which pages use them. To keep them, use route 1.
+     Don't split one app between a static build and a server: that is not tested. See
      [references/troubleshooting.md](references/troubleshooting.md#tanstack-start-and-new-lovable-apps).
 3. An `index.html` that loads `/src/main.tsx` (or any `/src/`, `.ts`, `.tsx`, `.jsx` script) is a
    **dev entry**, not a finished page. Build it.

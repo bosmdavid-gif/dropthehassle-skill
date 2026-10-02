@@ -5,7 +5,7 @@
 //   node preflight.mjs [folder] [--json]
 //
 // It mirrors the rules the DropTheHassle CLI and MCP server use to choose a folder (an index.html
-// at the top, or dist/, build/, out/, .output/public/ or dist/client/ in a project) and the
+// or a TanStack _shell.html at the top, or dist/, build/, out/, .output/public/ or dist/client/ in a project) and the
 // server's upload limits. The server still makes the final call on deploy.
 // Exit code: 0 ready, 1 not ready (see "blockers"), 2 bad usage.
 
@@ -30,6 +30,8 @@ const isFile = (p) => { try { return fs.statSync(p).isFile(); } catch { return f
 const isDir = (p) => { try { return fs.statSync(p).isDirectory(); } catch { return false; } };
 const readJson = (p) => { try { return JSON.parse(fs.readFileSync(p, 'utf8')); } catch { return null; } };
 const hasIndex = (d) => isFile(path.join(d, 'index.html'));
+// A TanStack Start SPA build has _shell.html as its start page (the server copies it to index.html).
+const hasShell = (d) => !isFile(path.join(d, 'index.html')) && isFile(path.join(d, '_shell.html'));
 const rel = (p) => { const r = path.relative(process.cwd(), p) || '.'; return r.startsWith('..') ? p : r; };
 
 function framework(dir, pkg) {
@@ -58,7 +60,7 @@ const BUILD_HINT = {
   cra: 'Run `npm install && npm run build`, then publish build/.',
   vite: 'Run `npm install && npm run build`, then publish dist/.',
   astro: 'Run `npm install && npm run build`, then publish dist/.',
-  'tanstack-start': 'This is a server app (TanStack Start). Run the whole app on AWS, Google Cloud, DigitalOcean or your own server and connect it with set_backend, or make a static SPA build. See references/troubleshooting.md, TanStack Start.',
+  'tanstack-start': 'This is a server app (TanStack Start). Run the whole app on AWS, Google Cloud, DigitalOcean or your own server and connect it with set_backend, or make a static SPA build (dist/client) without its server functions and /api routes. See references/troubleshooting.md, TanStack Start.',
 };
 
 function choose(dir) {
@@ -68,12 +70,17 @@ function choose(dir) {
   const project = buildScript || !!fw;
   if (!project) {
     if (hasIndex(dir)) return { dir, why: 'index.html at the top of the folder' };
+    if (hasShell(dir)) return { dir, why: '_shell.html at the top of the folder (a TanStack Start SPA build; DropTheHassle uses it as the start page)', fw: 'tanstack-start' };
     for (const name of ['dist', 'build', 'out', '_site', 'public', 'docs']) {
       if (hasIndex(path.join(dir, name))) return { dir: path.join(dir, name), why: `${name}/ holds index.html` };
     }
+    // The dist/ of a TanStack Start SPA build: dist/client/_shell.html next to dist/server/.
+    for (const name of ['client', 'dist/client']) {
+      if (hasShell(path.join(dir, name))) return { dir: path.join(dir, name), why: `${name}/ is a TanStack Start SPA build (_shell.html)`, fw: 'tanstack-start' };
+    }
     const marker = ['server.js', 'app.py', 'main.py', 'index.php', 'wsgi.py', 'manage.py'].find((m) => isFile(path.join(dir, m)));
     if (marker) return { dir, blocker: `No index.html, and ${marker} is here: this is an app that needs a server. DropTheHassle does not run it itself: host it on AWS, Google Cloud, DigitalOcean or your own server, then connect it with set_backend (no site: every path is proxied) or the dashboard's Backend card.` };
-    return { dir, blocker: 'No index.html at the top of this folder (or in dist/, build/, out/, _site/, public/ or docs/). Rename the main page to index.html, or point at the folder that has it.' };
+    return { dir, blocker: 'No index.html (or _shell.html for a TanStack SPA build) at the top of this folder (or in dist/, build/, out/, _site/, public/ or docs/). Rename the main page to index.html, or point at the folder that has it.' };
   }
   const prefer = { next: 'out', cra: 'build', nuxt: '.output/public', 'tanstack-start': 'dist/client', vite: 'dist', astro: 'dist' }[fw];
   const options = [prefer, 'dist', 'build', 'out', '.output/public'].filter(Boolean);

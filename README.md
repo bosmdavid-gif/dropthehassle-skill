@@ -18,7 +18,9 @@ and hand you a payment link, never to buy.
    Lovable/Bolt exports). DropTheHassle serves the built files and never runs a server itself. A
    server app (SSR, API routes, server functions, a TanStack Start app) runs on AWS, Google Cloud,
    DigitalOcean or your own server and is connected with `set_backend` or the dashboard's Backend
-   card: DropTheHassle then puts it behind the same link.
+   card: DropTheHassle then puts it behind the same link. A TanStack Start app (Lovable from
+   13 May 2026) can also go online as a static SPA build (`dist/client`), without its server
+   functions and `/api` routes.
 2. Runs a local preflight (`scripts/preflight.mjs`, no network, no dependencies) against the upload
    limits.
 3. Sets up the DropTheHassle CLI (`npx -y dropthehassle deploy`), the local MCP server
