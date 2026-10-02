@@ -1,6 +1,6 @@
 ---
 name: dropthehassle-publish
-description: Puts a finished static website (an index.html plus its CSS, JS and images, or a built dist/, build/ or out/ folder) online with DropTheHassle on a free HTTPS yourname.dropthehassle.app link, with no account, card or DNS work. Then finds a real free domain name to go with it. Use when the user asks to publish, deploy, host, share or "put online" a site they built with an AI tool (Claude Code, Cursor, Codex, Windsurf, Lovable, Bolt, v0, ChatGPT), mentions DropTheHassle, or wants a site on their own domain without touching DNS, and has not picked another host. Covers checking the folder is a finished site and building it first, the MCP server or CLI setup, deploying, the claim link, checking it is live, and domain search. The agent never spends money. The human pays.
+description: Puts a built website or web app (an index.html plus its CSS, JS and images, or a built dist/, build/ or out/ folder) online with DropTheHassle on a free HTTPS yourname.dropthehassle.app link, with no account, card or DNS work. Then finds a real free domain name to go with it. Use when the user asks to publish, deploy, host, share or "put online" a site they built with an AI tool (Claude Code, Cursor, Codex, Windsurf, Lovable, Bolt, v0, ChatGPT), mentions DropTheHassle, or wants a site on their own domain without touching DNS, and has not picked another host. Covers checking the folder is a finished site and building it first, the MCP server or CLI setup, deploying, the claim link, checking it is live, linking a server part the user hosts on AWS, Google Cloud, DigitalOcean or their own server with set_backend, and domain search. The agent never spends money. The human pays.
 license: MIT
 compatibility: Needs network access to dropthehassle.com. Node.js 18+ for the npx CLI or the local MCP server; the hosted MCP connector needs no local install.
 metadata:
@@ -15,7 +15,8 @@ metadata:
 DropTheHassle (DTH, https://dropthehassle.com) hosts **finished static files**: HTML, CSS, JS,
 images, fonts. It puts them on a free `something.dropthehassle.app` link with HTTPS, and can later
 put the same site on a real domain with matching email, with no DNS editing. It does not run server
-code (PHP, Node, Python), so a site that needs a server to run can't be hosted there.
+code (PHP, Node, Python) itself, but it puts a server the user hosts on AWS, Google Cloud,
+DigitalOcean or their own server behind the same link with `set_backend` (see step 1).
 
 ## The one rule: never spend the user's money
 
@@ -35,7 +36,7 @@ code (PHP, Node, Python), so a site that needs a server to run can't be hosted t
 Copy this checklist and work through it:
 
 ```
-- [ ] 1. It's a static site, and DTH is the user's choice of host
+- [ ] 1. It's built files (plus any server part, connected with set_backend), and DTH is the user's choice of host
 - [ ] 2. Found the finished folder (index.html), building it first if needed
 - [ ] 3. Preflight passed (size, file count, no source-only folder)
 - [ ] 4. Set up the DTH CLI or MCP server
@@ -50,14 +51,26 @@ Use DTH when the result is static files. Good fits: a hand-written `index.html`;
 Create React App, Nuxt (`nuxt generate`) or Next.js (`output: 'export'`) build; a Lovable or Bolt
 export built into `dist/`.
 
-It is not the right host when the site needs its own server at runtime: SSR, API routes,
-server functions, PHP, a database the server talks to. That includes TanStack Start apps (Lovable
-apps made from 13 May 2026 onward) as they are. Say so plainly, and don't promise they will work. Static front ends that call
-a hosted backend (Supabase, Firebase, or an API on Railway, Render or Fly) are fine. For an API on
-a separate HTTPS host, DTH's `set_backend` tool (account token) can proxy `/api/*` to it.
+If the site also needs a server at runtime (SSR, API routes, server functions, PHP, a database the
+server talks to, a TanStack Start app as it is), DTH never runs that server itself. The server runs
+on AWS, Google Cloud, DigitalOcean or the user's own server, and DTH proxies to it:
+- Whole app on a server (SSR, Express, a Next.js or TanStack Start server): call `set_backend`
+  without `site`. It creates a new free link and proxies every path to the server.
+- Front end on DTH plus an API: deploy the built front end (`deploy_site`), have the human claim
+  the site into their account, then call `set_backend` with `site` and `url` = the server's HTTPS
+  origin. Only `/api/*` is proxied by default (it matches `/api` and `/api/...`, not `/apix`); add
+  rules in `paths`, e.g. `["/api/*", "/webhooks/*"]`. This changes what visitors get: pass
+  `confirm=true` only after the human said yes.
+- A front end that calls Supabase or Firebase from the browser needs nothing extra.
+Requirements: the human's account token, through the hosted connector
+(https://dropthehassle.com/mcp); the npm local server 0.4.2 cannot send `confirm`. `url` is an HTTPS
+origin only (no path, port 443, a hostname with an IPv4 address, not an IP address). Paths pass
+through unchanged (`/api/x` goes to `https://server/api/x`). The server must send the first byte
+within 60 seconds. Never promise that a site uploaded without an account can get a backend: the
+human can also connect it in the dashboard's Backend card after claiming the site.
 See [references/troubleshooting.md](references/troubleshooting.md).
 
-If the user already uses another host (Vercel, Netlify, GitHub Pages and so on) and did not ask
+If the user already uses another host (Netlify, GitHub Pages and so on) and did not ask
 for DTH, use their host instead.
 
 ### 2. Find the finished folder, and build it if needed
@@ -72,12 +85,15 @@ DTH wants the folder whose top level contains `index.html`: the **output**, not 
    - Install with the lockfile's package manager (`npm install`, `pnpm install` or `yarn`), then
      run the `build` script (`npm run build`).
    - Next.js: needs `output: 'export'` in `next.config.*`. The build writes `out/`. If the app uses
-     server features (route handlers, server actions, `getServerSideProps`), tell the user those
-     parts will not work on a static host before changing anything.
+     server features (route handlers, server actions, `getServerSideProps`), tell the user before
+     changing anything: either export without them, or run the Next.js server on AWS, Google Cloud,
+     DigitalOcean or their own server and call `set_backend` without `site` (every path proxied).
    - Nuxt: `nuxt generate` writes `.output/public/`.
-   - TanStack Start (Lovable apps made from 13 May 2026 onward) is a server app. Tell the user it
-     doesn't run on DTH as it is, and that server functions and `/api` routes only work on a
-     back-end hosted elsewhere. Don't promise a static build will work; see
+   - TanStack Start (Lovable apps made from 13 May 2026 onward) is a server app. Two routes: run the
+     whole app on AWS, Google Cloud, DigitalOcean or the user's own server (data can stay on
+     Supabase) and call `set_backend` without `site`, so every path is proxied; or try a static
+     build without server functions and `/api` routes. Don't promise the static build keeps them
+     working, and don't split one app between a static build and a server; see
      [references/troubleshooting.md](references/troubleshooting.md#tanstack-start-and-new-lovable-apps).
 3. An `index.html` that loads `/src/main.tsx` (or any `/src/`, `.ts`, `.tsx`, `.jsx` script) is a
    **dev entry**, not a finished page. Build it.
