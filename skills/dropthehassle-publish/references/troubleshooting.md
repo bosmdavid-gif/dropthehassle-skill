@@ -11,7 +11,7 @@ agent when there is one. Follow those first. They are written for this.
 | "This upload has N files and the limit is …" | `too_many_files` | Usually `node_modules` or `.git` got in. Deploy only the build folder. |
 | "…too large…" | `too_large` | Make the build smaller (compress images, move video to a video host). Before a claim the cap is 25 MB, signed in it's 100 MB. |
 | "We cannot host executable or archive files (…)" | `forbidden_files` | Remove `.exe .msi .apk .dmg .scr .bat .zip .rar .7z .iso` files from the site folder. |
-| "This is an app that needs a server, and we do not run servers…" | `server_app` | The project is a server app (for example `server.js`, `app.py`). Host the server elsewhere (Railway, Render, Fly). A static front end can stay on DTH, and `set_backend` (token) proxies `/api/*` to the server. Don't rewrite the app unless the user asks. |
+| "This is an app that needs a server, and we do not run servers…" / "This is an app that runs on a server…" | `server_app` | The project is a server app (for example `server.js`, `app.py`). Host it on AWS, Google Cloud, DigitalOcean or the user's own server (HTTPS origin, port 443, no path). Then `set_backend` (account token, hosted connector) without `site`: a new free link proxies every path to it. With a static front end on a claimed DTH site: `set_backend` with `site` proxies `/api/*` (or the `paths` you give) and needs `confirm=true` after the human says yes. Don't rewrite the app unless the user asks. |
 | "This app runs on a server as it is…" / "This is your app's source code…" / "This is a server build of your app…" | `server_app_detected` | TanStack Start. See below. |
 | "You can put 5 new sites online per hour from this network…" / "…20 new sites online per day…" | HTTP 429 | Stop creating new sites. Re-deploy from the linked folder (CLI) or pass `site` with a token instead of making another anonymous site. |
 | "No DropTheHassle token set…" | (MCP) | The tool needs an account token. On npm `dropthehassle-mcp` 0.4.2 this includes `search_domain` and `whoami`. Use the hosted connector or the HTTP search in [domains.md](domains.md) for search, or ask the human for a token for account tools. Deploy still works without one. |
@@ -36,10 +36,12 @@ agent when there is one. Follow those first. They are written for this.
 ## TanStack Start and new Lovable apps
 
 Lovable apps made from 13 May 2026 onward are TanStack Start apps. They are server apps: as they
-are, they don't run on DTH, which only hosts static files. Tell the user that plainly and don't
-promise it will work. The usual answer is to keep the app on Lovable or on a host that runs server
-code. Server functions and `/api` routes only work on a back-end hosted elsewhere (DTH's
-`set_backend` can put an HTTPS back-end behind the user's domain).
+are, DTH does not run them itself. Two routes. 1) Run the whole app on AWS, Google Cloud,
+DigitalOcean or the user's own server (data can stay on Supabase), then call `set_backend` without
+`site` (account token, hosted connector https://dropthehassle.com/mcp): every path is proxied, so
+server functions and `/api` routes work behind a DTH link. 2) A static SPA build (below), without
+server functions and `/api` routes. Keeping it on Lovable is also fine. Don't split one app between
+a static build and a server: that is not tested.
 
 Only if the user wants to try a static build anyway: get the code from GitHub first (every Lovable
 plan can connect to GitHub). The server's own instruction for the agent is:
@@ -53,8 +55,9 @@ plan can connect to GitHub). The server's own instruction for the agent is:
 > a static host, and tell me which pages use them. Tell me when dist/client is ready to upload.
 
 If that build works and the pages the user needs don't rely on server functions or `/api` routes,
-deploy `dist/client` and check the site in a browser. If the app relies on server functions, tell
-the user to keep it on Lovable or use a host that runs server code. Guides:
+deploy `dist/client` and check the site in a browser. If the app relies on server functions, use
+route 1 above (whole app on AWS, Google Cloud, DigitalOcean or the user's own server plus
+`set_backend`), or keep it on Lovable. Guides:
 https://dropthehassle.com/guides/lovable-custom-domain and
 https://dropthehassle.com/guides/move-off-lovable
 
