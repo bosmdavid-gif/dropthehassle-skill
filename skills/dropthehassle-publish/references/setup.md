@@ -33,7 +33,7 @@ With a token, run `claude mcp add dropthehassle -e DTH_TOKEN=dth_… -- npx -y d
 Do this in the human's own terminal so the token doesn't end up in the chat. To share the setting
 with a project, `--scope project` writes `.mcp.json`. Only commit that file without a token in it.
 
-Or skip MCP and run the CLI from the agent's shell: `npx -y dropthehassle deploy ./dist`.
+Or skip MCP and run the CLI from the agent's shell: `npx -y dropthehassle deploy <build folder>` (e.g. `dist/`).
 
 **Claude Code on the web** (claude.ai/code) runs in a cloud machine whose default network level
 (Trusted) blocks dropthehassle.com. Either add the hosted connector `https://dropthehassle.com/mcp`
