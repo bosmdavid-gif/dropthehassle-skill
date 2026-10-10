@@ -10,14 +10,13 @@
   "repository": "https://github.com/bosmdavid-gif/dropthehassle-skill",
   "license": "MIT",
   "keywords": [
+    "mcp",
     "deploy",
-    "put site online",
-    "publish website",
-    "custom domain",
-    "https",
     "hosting",
-    "vibe coding",
-    "mcp"
+    "custom-domain",
+    "https",
+    "domains",
+    "vibecoding"
   ],
   "logo": ".claude-plugin/icon.png"
 }
