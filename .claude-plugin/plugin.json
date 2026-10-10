@@ -1,6 +1,6 @@
 {
   "name": "dropthehassle",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Put your site online with DropTheHassle: a live HTTPS link in one step, a check that it's live, and your own domain without DNS. The agent never spends money.",
   "author": {
     "name": "DropTheHassle",
@@ -18,5 +18,11 @@
     "dropthehassle"
   ],
   "icon": ".claude-plugin/icon.png",
-  "privacyPolicyUrl": "https://dropthehassle.com/privacy"
+  "privacyPolicyUrl": "https://dropthehassle.com/privacy",
+  "mcpServers": {
+    "dropthehassle": {
+      "type": "http",
+      "url": "https://dropthehassle.com/mcp"
+    }
+  }
 }
