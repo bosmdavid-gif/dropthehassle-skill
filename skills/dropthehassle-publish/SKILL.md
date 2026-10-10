@@ -188,6 +188,8 @@ many builds wipe `dist/` on every rebuild, which would make the next deploy a ne
   `DTH_NO_OPEN=1` stops it opening a browser.
 - `npx dropthehassle status` and `rollback` only work in a folder linked with `--login` or
   `--code`, not after an anonymous deploy.
+  `rollback` restores the previous version (run it again to undo). The human can also press
+  Restore on the site's Update screen (claimed sites only).
 
 **MCP** `deploy_site`:
 
