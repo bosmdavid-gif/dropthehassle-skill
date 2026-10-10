@@ -43,7 +43,7 @@ Or add to `mcp.json`:
 { "mcpServers": { "dropthehassle": { "url": "https://dropthehassle.com/mcp" } } }
 ```
 
-Then ask: "put my site online". No token needed.
+Then ask: "publish my site". No token needed.
 
 ## Install
 
@@ -83,7 +83,7 @@ cp -r dropthehassle-skill/skills/dropthehassle-publish ~/.claude/skills/
 ```
 
 Use `.claude/skills/` inside a project instead to share it with the repo. Claude picks the skill up
-by itself when you ask to put a site online, or call it with `/dropthehassle-publish`
+by itself when you ask to publish a site, or call it with `/dropthehassle-publish`
 (`/dropthehassle:dropthehassle-publish` when installed as a plugin).
 
 ### Cursor
@@ -151,7 +151,7 @@ setup per tool: [references/setup.md](skills/dropthehassle-publish/references/se
 
 Open a folder with a finished site, or a project that builds to one, and ask:
 
-> Put this site online with DropTheHassle and give me the link.
+> Publish this site with DropTheHassle and give me the link.
 
 You should see the agent check or build the folder, run the preflight, deploy, and come back with
 a `….dropthehassle.app` link, a claim link, and a live check. Then try:
@@ -193,7 +193,7 @@ tools' own messages win. Found something out of date? Open an issue.
 - llms.txt: https://dropthehassle.com/llms.txt
 - MCP server: https://github.com/bosmdavid-gif/dropthehassle-mcp ([npm](https://www.npmjs.com/package/dropthehassle-mcp))
 - CLI: [npm `dropthehassle`](https://www.npmjs.com/package/dropthehassle)
-- Guides: [put AI-built HTML online](https://dropthehassle.com/guides/put-ai-html-online),
+- Guides: [publish AI-built HTML](https://dropthehassle.com/guides/put-ai-html-online),
   [Claude Code](https://dropthehassle.com/guides/claude-code-website-online),
   [Cursor](https://dropthehassle.com/guides/cursor-site-own-domain),
   [Codex](https://dropthehassle.com/guides/codex-deploy-custom-domain),
