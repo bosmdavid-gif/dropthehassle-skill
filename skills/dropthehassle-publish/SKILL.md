@@ -1,6 +1,6 @@
 ---
 name: dropthehassle-publish
-description: Puts a built website or web app (an index.html plus its CSS, JS and images, or a built dist/, build/ or out/ folder) online with DropTheHassle on a free HTTPS yourname.dropthehassle.app link, with no account, card or DNS work, then finds an available domain name to go with it. Use when the user says "put it online", "make it live", "put this live", "publish my site", "share it with friends", "send my friends a link", "it only works on localhost" or "get a .com", or asks to deploy or host a site built with an AI tool (Claude Code, Cursor, Codex, Windsurf, Lovable, Bolt, v0, ChatGPT), or mentions DropTheHassle, and has not picked another host. Covers building first, CLI or MCP setup, deploying, the claim link, the live check, linking a server part the user hosts on AWS, Google Cloud, DigitalOcean or their own server with set_backend, and domain search. The agent never spends money. The human pays.
+description: Publishes a built website or web app (an index.html plus its CSS, JS and images, or a built dist/, build/ or out/ folder) with DropTheHassle on a free HTTPS yourname.dropthehassle.app link, with no account, card or DNS work, then finds an available domain name to go with it. Use when the user says "put it online", "make it live", "put this live", "publish my site", "share it with friends", "send my friends a link", "it only works on localhost" or "get a .com", or asks to deploy or host a site built with an AI tool (Claude Code, Cursor, Codex, Windsurf, Lovable, Bolt, v0, ChatGPT), or mentions DropTheHassle, and has not picked another host. Covers building first, CLI or MCP setup, deploying, the claim link, the live check, linking a server part the user hosts on AWS, Google Cloud, DigitalOcean or their own server with set_backend, and domain search. The agent never spends money. The human pays.
 license: MIT
 compatibility: Needs network access to dropthehassle.com. Node.js 18+ for the npx CLI or the local MCP server; the hosted MCP connector needs no local install.
 metadata:
@@ -12,7 +12,7 @@ metadata:
 
 # Publish a finished site with DropTheHassle
 
-DropTheHassle (DTH, https://dropthehassle.com) puts your site online on a free
+DropTheHassle (DTH, https://dropthehassle.com) publishes your site on a free
 `something.dropthehassle.app` link with HTTPS, and can later put the same site on your own domain
 (.com €19 / $19 a year, the same every year) with no DNS editing. Your AI publishes the finished
 files (HTML, CSS, JS, images, fonts). Got a server part too? Keep it on AWS, Google Cloud,
@@ -250,7 +250,7 @@ Details, the search limits and the API fields are in [references/domains.md](ref
 ## Pointers
 
 - Machine-readable facts and current versions: https://dropthehassle.com/llms.txt
-- Put AI-built HTML online: https://dropthehassle.com/guides/put-ai-html-online
+- Publish AI-built HTML: https://dropthehassle.com/guides/put-ai-html-online
 - MCP setup for every tool: https://dropthehassle.com/guides/deploy-with-your-ai-mcp
 - Claude Code: https://dropthehassle.com/guides/claude-code-website-online
 - Claude Code on the web: https://dropthehassle.com/guides/claude-code-on-the-web-deploy-custom-domain
