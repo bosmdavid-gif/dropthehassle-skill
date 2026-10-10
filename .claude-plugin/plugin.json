@@ -1,7 +1,7 @@
 {
   "name": "dropthehassle",
-  "version": "1.0.4",
-  "description": "Put your site online with DropTheHassle: a live HTTPS link in one step, a check that it's live, and your own domain without DNS. The agent never spends money.",
+  "version": "1.0.5",
+  "description": "Put your Claude Code site online. Claude runs `npx -y dropthehassle@latest deploy` and your site is live on a free HTTPS link, no account needed. Want your own .com? Claude finds a name and hands you a €19/$19 payment link. You pay, and the site goes live on it with no DNS. A real mailbox on it is optional. Claude never pays.",
   "author": {
     "name": "DropTheHassle",
     "url": "https://dropthehassle.com"
