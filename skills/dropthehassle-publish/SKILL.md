@@ -211,6 +211,8 @@ A site token for that site may edit it before the site is claimed, the same way 
 
 **Password.** On a claimed site, `set_site_password` sets the visitor password (an empty password makes the site public) and `clear_site_password` removes it; claim an unclaimed site first. Needs the account token, does not charge, and list tools never return the password. On Update, one Password (optional) field and Save; empty means public. It works on the free link and on a custom domain.
 
+**Hide from search.** On a claimed site, `set_site_indexing` asks search engines to skip it (mode `noindex`) or to list it again (mode `allow`, the default after claim); claim an unclaimed site first. Needs the account token, does not charge, and does not promise a ranking. After sign-in, the Google result card has Hide from Google or Show in search.
+
 **After every first deploy, tell the human, word for word, the two things they need:**
 
 1. The live URL.
