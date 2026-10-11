@@ -145,7 +145,7 @@ Pick one. None of them needs an account for a first deploy.
 
 | Situation | Use |
 | --- | --- |
-| You can run shell commands (Claude Code, Codex CLI, Cursor or Windsurf agent) | CLI: `npx -y dropthehassle deploy <folder>` |
+| You can run shell commands (Claude Code, Codex CLI, Cursor or Windsurf agent) | CLI: `npx -y dropthehassle@latest deploy <folder> --email <the user's email>` |
 | The user wants DTH tools in the editor (deploy, domain search, their sites) | Local MCP server: `npx -y dropthehassle-mcp` |
 | No local shell or network sandbox (Claude.ai, Claude Code on the web, Codex cloud) | Hosted MCP connector: `https://dropthehassle.com/mcp` |
 
@@ -170,14 +170,17 @@ into chat when they can put it in the config themselves. The token cannot pay.
 after the build, or on the plain site folder:
 
 ```bash
-npx -y dropthehassle deploy .            # in the project: it uploads the build output it finds
-npx -y dropthehassle deploy ./my-site    # a plain folder with index.html
+npx -y dropthehassle@latest deploy . --email <the user's email>         # in the project: it uploads the build output it finds
+npx -y dropthehassle@latest deploy ./my-site --email <the user's email>  # a plain folder with index.html
 ```
 
 Prefer the project folder over `./dist`: the link file is written in the folder you name, and
 many builds wipe `dist/` on every rebuild, which would make the next deploy a new site.
 
-- With no flags the deploy is anonymous. It prints `Live at https://….dropthehassle.app` and a
+- Ask the user for their email first, then run the command. Without an account the CLI needs
+  `--email`: the claim link goes there. Never make one up. Without a terminal the CLI stops
+  with an error when `--email` is missing.
+- Without `--login` or `--code` the deploy is anonymous. It prints `Live at https://….dropthehassle.app` and a
   **claim link**.
 - It writes `.dropthehassle.json` in the folder you named. Running `deploy` again from that folder
   updates the **same** site. The file holds the site's key: keep it out of git (the CLI adds it to

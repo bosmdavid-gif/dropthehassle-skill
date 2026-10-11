@@ -23,7 +23,8 @@ and hand you a payment link, never to buy.
    functions and `/api` routes.
 2. Runs a local preflight (`scripts/preflight.mjs`, no network, no dependencies) against the upload
    limits.
-3. Sets up the DropTheHassle CLI (`npx -y dropthehassle deploy`), the local MCP server
+3. Sets up the DropTheHassle CLI (`npx -y dropthehassle@latest deploy . --email <the user's email>`; it asks you for
+   your email first, never makes one up), the local MCP server
    (`npx -y dropthehassle-mcp`) or the hosted connector (`https://dropthehassle.com/mcp`).
 4. Deploys, and gives you the live link plus the **claim link** (valid 7 days).
 5. Checks the site is really live (the same check as
