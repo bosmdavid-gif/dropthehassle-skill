@@ -1,0 +1,23 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "dropthehassle",
+  "version": "1.0.5",
+  "description": "Your AI publishes a site to a free HTTPS link or your own .com. It never pays.",
+  "author": {
+    "name": "DropTheHassle",
+    "email": "info@dropthehassle.com",
+    "url": "https://dropthehassle.com"
+  },
+  "homepage": "https://dropthehassle.com",
+  "repository": "https://github.com/bosmdavid-gif/dropthehassle-skill",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "hosting",
+    "mcp",
+    "deploy",
+    "claude-code",
+    "cursor",
+    "codex"
+  ]
+}
