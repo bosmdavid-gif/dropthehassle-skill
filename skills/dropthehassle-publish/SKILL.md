@@ -207,7 +207,7 @@ many builds wipe `dist/` on every rebuild, which would make the next deploy a ne
 
 A site token for that site may edit it before the site is claimed, the same way an update with that token does. Without a token, claim the site first. On the site, the human can press Update website, then Edit files, then Save. Say Go live, Publish, Restore, and Update. Never say "Put online" or "put your site online".
 
-**Collect leads.** On a claimed site, `enable_form` turns on a contact form (name, email, message). Each submission is emailed to the owner's mailbox and kept for the dashboard. `list_form_submissions` lists recent messages. Claim the site first. Does not charge. Say Go live, Publish, Restore, and Update. Never say "Put online".
+**Collect leads.** On a claimed site, `enable_form` turns on a contact form (name, email, message). Each submission is emailed to the owner's mailbox and kept for the dashboard. `list_form_submissions` lists recent messages. Claim the site first. Does not charge.
 
 **After every first deploy, tell the human, word for word, the two things they need:**
 
