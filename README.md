@@ -201,6 +201,12 @@ tools' own messages win. Found something out of date? Open an issue.
   [Codex](https://dropthehassle.com/guides/codex-deploy-custom-domain),
   [Windsurf](https://dropthehassle.com/guides/windsurf-deploy-custom-domain)
 
+## Privacy and support
+
+- Privacy: https://dropthehassle.com/privacy
+- Terms: https://dropthehassle.com/terms
+- Support: https://dropthehassle.com/support or info@dropthehassle.com
+
 ## License
 
 MIT. See [LICENSE](LICENSE).
