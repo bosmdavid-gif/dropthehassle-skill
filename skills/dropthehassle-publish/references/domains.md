@@ -50,8 +50,9 @@ Then ask whether they want one. Don't create a payment link unasked.
    live on that site by itself, with HTTPS. DTH does the DNS.
 4. Or the human buys it in the dashboard.
 
-Mailboxes at the domain are a paid option the human turns on in the dashboard. No tool turns
-them on.
+After the domain is active, offer a mailbox. Check site_status until the domain is active, then
+get_email_checkout_link (hello@domain). Give that payment link to the human. Never pay it
+yourself. There is no combined domain and mailbox checkout.
 
 ## A domain they already own
 
