@@ -29,10 +29,17 @@
   "interface": {
     "displayName": "DropTheHassle",
     "shortDescription": "Your AI publishes a site to a free HTTPS link or your own .com. It never pays.",
+    "longDescription": "Your AI publishes a finished site to a free HTTPS link on dropthehassle.app, or to your own .com. Searching names and publishing are free. A payment link is handed to you. The AI never pays.",
     "developerName": "DropTheHassle",
+    "category": "Deployment",
+    "capabilities": ["Interactive"],
     "websiteURL": "https://dropthehassle.com",
     "privacyPolicyURL": "https://dropthehassle.com/privacy",
     "termsOfServiceURL": "https://dropthehassle.com/terms",
-    "composerIcon": "./assets/icon.png"
+    "defaultPrompt": [
+      "Publish this site with DropTheHassle and give me the link."
+    ],
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/icon.png"
   }
 }
