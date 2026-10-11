@@ -47,6 +47,8 @@ Then ask: "publish my site". No token needed.
 
 ## Install
 
+Install the DropTheHassle skill in Claude Code, Cursor, Codex or Gemini CLI: `npx skills add bosmdavid-gif/dropthehassle-skill`
+
 The skill lives in [`skills/dropthehassle-publish/`](skills/dropthehassle-publish). Install it
 with the open [skills CLI](https://github.com/vercel-labs/skills), as a Claude Code plugin, or by
 copying the folder.
