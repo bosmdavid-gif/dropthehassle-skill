@@ -213,6 +213,8 @@ A site token for that site may edit it before the site is claimed, the same way 
 
 **Hide from search.** On a claimed site, `set_site_indexing` asks search engines to skip it (mode `noindex`) or to list it again (mode `allow`, the default after claim); claim an unclaimed site first. Needs the account token, does not charge, and does not promise a ranking. After sign-in, the Google result card has Hide from Google or Show in search.
 
+**Site metrics.** Ask DropTheHassle for visitors, page views, and leads (messages) on a claimed site. Tools: `get_site_metrics` (period day, week, month, or year), `list_site_leads`, `get_site_status`, `get_site_readiness`, and `list_sites`. Read-only. They do not charge and they do not promise a search ranking. No dashboard needed.
+
 **After every first deploy, tell the human, word for word, the two things they need:**
 
 1. The live URL.
