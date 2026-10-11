@@ -1,6 +1,6 @@
 ---
 name: dropthehassle-publish
-description: Publishes a built website or web app (an index.html plus its CSS, JS and images, or a built dist/, build/ or out/ folder) with DropTheHassle on a free HTTPS yourname.dropthehassle.app link, with no account, card or DNS work, then finds an available domain name to go with it. Use when the user says "put it online", "make it live", "put this live", "publish my site", "share it with friends", "send my friends a link", "it only works on localhost" or "get a .com", or asks to deploy or host a site built with an AI tool (Claude Code, Cursor, Codex, Windsurf, Lovable, Bolt, v0, ChatGPT), or mentions DropTheHassle, and has not picked another host. Covers building first, CLI or MCP setup, deploying, the claim link, the live check, linking a server part the user hosts on AWS, Google Cloud, DigitalOcean or their own server with set_backend, and domain search. The agent never spends money. The human pays.
+description: Publishes a built website or web app (an index.html plus its CSS, JS and images, or a built dist/, build/ or out/ folder) with DropTheHassle on a free HTTPS yourname.dropthehassle.app link, with no account, card or DNS work, then finds an available domain name to go with it. Use when the user says "go live", "make it live", "put this live", "publish my site", "share it with friends", "send my friends a link", "it only works on localhost" or "get a .com", or asks to deploy or host a site built with an AI tool (Claude Code, Cursor, Codex, Windsurf, Lovable, Bolt, v0, ChatGPT), or mentions DropTheHassle, and has not picked another host. Covers building first, CLI or MCP setup, deploying, the claim link, the live check, linking a server part the user hosts on AWS, Google Cloud, DigitalOcean or their own server with set_backend, and domain search. The agent never spends money. The human pays.
 license: MIT
 compatibility: Needs network access to dropthehassle.com. Node.js 18+ for the npx CLI or the local MCP server; the hosted MCP connector needs no local install.
 metadata:
@@ -22,7 +22,7 @@ step 1).
 ## When to use this
 
 Users rarely say "deploy". Treat these as a request to publish with DTH (when they haven't picked
-another host): "put it online", "make it live", "put this live", "publish my site", "share it with
+another host): "go live", "make it live", "put this live", "publish my site", "share it with
 friends", "send my friends a link", "it only works on localhost" (localhost is only their own
 computer; a published link works when the laptop is off), and "get a .com" / "my own domain".
 For a domain: a .com, .org or .net is €19 / $19 a year, the same every year; still quote the price
@@ -225,7 +225,7 @@ A site token for that site may edit it before the site is claimed, the same way 
 
 Don't open the claim link yourself. Claiming is the human signing in with their email.
 
-After deploy_site: give the human the live link and the claim link. Email is optional; ask for it after go-live, never before. Then offer their own domain with a mailbox: search_domain with 2-3 names from the project, and quote only those prices. When they say yes: sign_in (or connect) → claim_site → get_checkout_link. After they pay, check site_status until the domain is active → get_email_checkout_link (hello@domain). Give every payment link to the human; never pay yourself. Say Go live / Publish, never put online. Make no ranking claims.
+After deploy_site: give the human the live link and the claim link. Email is optional; ask for it after go-live, never before. Then offer their own domain with a mailbox: search_domain with 2-3 names from the project, and quote only those prices. When they say yes: sign_in (or connect) → claim_site → get_checkout_link. After they pay, check site_status until the domain is active → get_email_checkout_link (hello@domain). Give every payment link to the human; never pay yourself. Say Go live / Publish. Make no ranking claims.
 
 ### 6. Check that it's live
 

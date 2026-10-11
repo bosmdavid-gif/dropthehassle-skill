@@ -1,7 +1,7 @@
 # DropTheHassle publish skill
 
-An open [Agent Skill](https://agentskills.io) that teaches your coding agent to put a **built
-site or web app** online with [DropTheHassle](https://dropthehassle.com): a free HTTPS
+An open [Agent Skill](https://agentskills.io) that teaches your coding agent to publish a **built
+site or web app** with [DropTheHassle](https://dropthehassle.com): a free HTTPS
 `yourname.dropthehassle.app` link with no account, card or DNS work, then a real domain when you
 want one.
 
