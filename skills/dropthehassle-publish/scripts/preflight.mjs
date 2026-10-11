@@ -159,6 +159,6 @@ if (asJson) {
   for (const w of report.warnings) console.log(`  warning: ${w}`);
   // Name the folder that was checked: the CLI finds the build output itself, and its link file
   // (.dropthehassle.json) then lives in the project, where a rebuild of dist/ cannot delete it.
-  if (report.ready) console.log(`  next: npx -y dropthehassle deploy ${JSON.stringify(report.folder)}`);
+  if (report.ready) console.log(`  next: ask the user for their email, then run: npx -y dropthehassle@latest deploy ${JSON.stringify(report.folder)} --email <the user's email>`);
 }
 process.exit(report.ready ? 0 : 1);

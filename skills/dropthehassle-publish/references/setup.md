@@ -4,7 +4,7 @@ Three ways in. None needs an account for the first deploy.
 
 | | CLI | Local MCP server | Hosted MCP connector |
 | --- | --- | --- | --- |
-| Run | `npx -y dropthehassle deploy [folder]` | `npx -y dropthehassle-mcp` (stdio) | `https://dropthehassle.com/mcp` (Streamable HTTP) |
+| Run | `npx -y dropthehassle@latest deploy [folder] --email <the user's email>` | `npx -y dropthehassle-mcp` (stdio) | `https://dropthehassle.com/mcp` (Streamable HTTP) |
 | Reads the folder from disk | yes | yes (`folder`, absolute path) | no: files are sent inline |
 | No-token tools | deploy | `deploy_site` (npm 0.4.2). Source 0.4.3 adds `search_domain` and `whoami` | `deploy_site`, `search_domain`, `whoami` |
 | Needs | Node.js 18+, network to dropthehassle.com | Node.js 18+, network to dropthehassle.com | an MCP client that supports remote servers |
@@ -33,7 +33,9 @@ With a token, run `claude mcp add dropthehassle -e DTH_TOKEN=dth_… -- npx -y d
 Do this in the human's own terminal so the token doesn't end up in the chat. To share the setting
 with a project, `--scope project` writes `.mcp.json`. Only commit that file without a token in it.
 
-Or skip MCP and run the CLI from the agent's shell: `npx -y dropthehassle deploy <build folder>` (e.g. `dist/`).
+Or skip MCP and run the CLI from the agent's shell, in the project folder after the build:
+`npx -y dropthehassle@latest deploy . --email <the user's email>`.
+Ask the user for their email first, then run it.
 
 **Claude Code on the web** (claude.ai/code) runs in a cloud machine whose default network level
 (Trusted) blocks dropthehassle.com. Either add the hosted connector `https://dropthehassle.com/mcp`
@@ -76,7 +78,7 @@ url = "https://dropthehassle.com/mcp"
 ```
 
 Codex keeps network access off in its sandbox by default. To use the CLI instead, approve the one
-`npx -y dropthehassle deploy` command when Codex asks for network access. Setting
+`npx -y dropthehassle@latest deploy . --email <the user's email>` command when Codex asks for network access. Setting
 `[sandbox_workspace_write] network_access = true` opens the network for every command.
 **Codex cloud**: turn on internet access for the environment and allow `dropthehassle.com` (plus
 package managers so npm works). On the legacy setup, a GET-only method filter blocks the upload.
