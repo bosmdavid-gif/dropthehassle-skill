@@ -205,7 +205,7 @@ many builds wipe `dist/` on every rebuild, which would make the next deploy a ne
 
 **One file, without a full folder Update.** When the human wants to change a single file on a site that is already live, do not upload the whole folder. Use `list_site_files`, then `get_site_file`, then `edit_site_file`. `edit_site_file` replaces that file only. Other files stay. It does not need `confirm`. A full folder Publish or Update still uses `deploy_site`.
 
-A site token for that site may edit it before the site is claimed, the same way an update with that token does. Without a token, claim the site first. On the site, the human can press Update website, then Edit files, then Save. Say Go live, Publish, Restore, and Update. Never say "Put online" or "put your site online".
+A site token for that site may edit it before the site is claimed, the same way an update with that token does. Without a token, claim the site first. On the site, the human can press Update website, then Edit files, then Save.
 
 **Collect leads.** On a claimed site, `enable_form` turns on a contact form (name, email, message). Each submission is emailed to the owner's mailbox and kept for the dashboard. `list_form_submissions` lists recent messages. Claim the site first. Does not charge.
 
