@@ -209,6 +209,8 @@ A site token for that site may edit it before the site is claimed, the same way 
 
 **Collect leads.** On a claimed site, `enable_form` turns on a contact form (name, email, message). Each submission is emailed to the owner's mailbox and kept for the dashboard. `list_form_submissions` lists recent messages. Claim the site first. Does not charge.
 
+**Password.** On a claimed site, `set_site_password` sets the visitor password (an empty password makes the site public) and `clear_site_password` removes it; claim an unclaimed site first. Needs the account token, does not charge, and list tools never return the password. On Update, one Password (optional) field and Save; empty means public. It works on the free link and on a custom domain.
+
 **After every first deploy, tell the human, word for word, the two things they need:**
 
 1. The live URL.
