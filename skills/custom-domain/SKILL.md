@@ -20,20 +20,21 @@ at the user's registrar. HTTPS follows by itself.
    `npx -y dropthehassle@latest deploy ./dist` (answer gives the live link and claim link).
 2. **Ask for the exact name** (`example.com` or `www.example.com`). Don't guess it.
 3. **Get the A record**, one of:
-   - Folder published with the CLI: read `site_id` and `site_token` from that folder's
-     `.dropthehassle.json`, then
+   - Unclaimed folder published anonymously with the CLI (only then): read `site_id` and `site_token`
+     from that folder's `.dropthehassle.json`, then
      ```bash
      curl -s -X POST "https://dropthehassle.com/api/v1/sites/<site_id>/connect" \
        -H "Authorization: Bearer <site_token>" -H "Content-Type: application/json" \
        -d '{"name":"example.com"}'
      ```
      The answer says which A record to set. Don't print the site token back to the user.
-   - Claimed site: the human opens the site in the dashboard, presses **Point it here** and enters the
-     name. The dashboard shows the address.
+   - Claimed site: the site token no longer works. Use `sign_in` on the hosted MCP
+     (https://dropthehassle.com/mcp) and connect the name there, or the human opens the site in the
+     dashboard, presses **Point it here** and enters the name. The dashboard shows the address.
 4. **Show the human the record** (type A, host `@` or the subdomain, value from the answer). They set
    it at their registrar. Don't log in to their registrar or change DNS for them.
-5. **Check it**: after they set it, the human presses **Check now** in the dashboard, or run
-   `npx -y dropthehassle@latest status <site>`. DNS can take minutes to hours. Then open
+5. **Check it**: after they set it, the human presses **Check now** in the dashboard, or use the
+   `check_live` or `site_status` MCP tools. DNS can take minutes to hours. Then open
    `https://example.com` and confirm it serves the site.
 
 ## Notes
