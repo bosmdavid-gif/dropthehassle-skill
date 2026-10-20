@@ -35,6 +35,7 @@ You never pay. Deploying and the free link cost nothing. Anything that costs mon
 5. **Offer, don't push**, after go-live: their own domain (.com €19 / $19 a year, the same every year;
    quote the price from a `search_domain` answer in this session) and email on their domain. See the
    `buy-domain` and `domain-email` skills. The domain then serves this DropTheHassle site with no DNS
-   setup.
+   setup. Keeping the site on another host? The domain can still be bought here and linked to that
+   host's HTTPS address with `set_backend` (or the Backend card), with no DNS records.
 
 Email for the claim link is optional; ask after go-live, never before.
