@@ -12,7 +12,7 @@ metadata:
 # Buy a domain name (the human pays)
 
 DropTheHassle sells .com, .org and .net at €19 / $19 a year (including VAT in the EU, the same every
-year), .nl and .eu at €12 / $12 and .app at €25 / $25. It does not sell .co, .shop, .studio, .io or .ai.
+year), .nl and .eu at €12 / $12 a year and .app at €25 / $25 a year (including VAT in the EU). It does not sell .co, .shop, .studio, .io or .ai.
 A name bought here goes live on the user's DropTheHassle site with HTTPS and no DNS editing.
 Always quote the price from a search answer in this session, not from this page.
 

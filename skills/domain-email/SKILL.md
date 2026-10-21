@@ -32,7 +32,7 @@ mail or see the mailbox password, and you don't need to.
 4. **Ask which address** they want (e.g. `hello`, `info`, their name). Don't pick it for them.
 5. **Get the payment link**: `get_email_checkout_link` with `site` and `address`. Give the link and
    price to the human. The human pays.
-6. **After they pay**, the mailbox and its DNS records are set up. Check `site_status`, then tell them
+6. **After they pay**, the mailbox is set up for them, with nothing to change in DNS. Check `site_status`, then tell them
    to open the webmail in the dashboard or add the IMAP/SMTP settings shown there to their mail app.
 
 ## Not available to an AI
